@@ -12,6 +12,8 @@ import model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class DAO {
@@ -251,5 +253,27 @@ public class DAO {
         }
 
     }
-
+    public Product getProduct(String productID) throws Exception {
+        conn = DBConnect.getConnection();
+        String query = "select * from sanpham where id = '" + productID+"'";
+        Product p = new Product();
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                List<Product> list = new ArrayList<Product>();
+                return p = new Product(
+                        rs.getString(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getDouble(5),
+                        rs.getDouble(6)
+                );
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(DAO.class.getName()).log(Level.SEVERE,null,e);
+        }
+        return null;
+    }
 }
