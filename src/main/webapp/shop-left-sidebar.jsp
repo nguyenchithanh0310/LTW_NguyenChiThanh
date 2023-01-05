@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Product" %>
+<%@ page import="java.text.NumberFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -17,6 +18,7 @@
 		<title>Petmark ❤️</title>
 	</head>
 	<body class="">
+
 		<div class="site-wrapper">
 
 
@@ -163,6 +165,8 @@
 							</div>
 							<%
 								DAO dao = new DAO();
+								NumberFormat n = NumberFormat.getInstance();
+								n.setMinimumIntegerDigits(0);
 							%>
 							<div class="shop-product-wrap grid with-pagination row border grid-four-column  me-0 ms-0 g-0">
 								<% for (Product p : dao.getAllProduct()){%>
@@ -182,7 +186,7 @@
 											<h3 class="font-weight-500"><a href="product-details.html"><%=p.getName()%></a></h3>
 											<div class="price text-red">
 												
-												<span><%=p.getPrice()%></span>
+												<span><%=n.format(p.getPrice())%></span>
 											</div>
 											<div class="btn-block grid-btn">
 												<a href="cart.html" class="btn btn-outlined btn-rounded btn-mid"  >Thêm vào giỏ</a>
