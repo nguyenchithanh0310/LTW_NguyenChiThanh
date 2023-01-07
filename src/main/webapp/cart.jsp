@@ -1,6 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="dao.DAO" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Product" %>
+<%@ page import="dao.CartDAO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -48,36 +52,30 @@
 										</thead>
 										<tbody>
 											<!-- Product Row -->
+											<%
+												DAO dao = new DAO();
+												List<Product> list = CartDAO.getGiohang();
+												int count = 1;
+												int total=0;
+												for(Product p: list){
+													total+=p.getPrice();
+											%>
 											<tr>
-												<td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a></td>
-												<td class="pro-thumbnail"><a href="#"><img src="image/product/home-2/product-1.png" alt="Product"></a></td>
-												<td class="pro-title"><a href="#">Deramaxx</a></td>
-												<td class="pro-price"><span>500 VND</span></td>
+												<td class="pro-remove"><a href="DelectProduct?id=<%=p.getId()%>"><i class="far fa-trash-alt"></i></a></td>
+												<td class="pro-thumbnail"><a href="#"><img src="<%= p.getImage()%>" alt="Product"></a></td>
+												<td class="pro-title"><a href="#"><%= p.getName()%></a></td>
+												<td class="pro-price"><span><%= p.getPrice()%></span></td>
 												<td class="pro-quantity">
 													<div class="pro-qty">
 														<div class="count-input-block">
-															<input type="number" class="form-control text-center" value="1">
+															<input type="number" class="form-control text-center" value="<%= count%>">
 														</div>
 													</div>
 												</td>
-												<td class="pro-subtotal"><span>500 VND</span></td>
+												<td class="pro-subtotal"><span><%=p.getPrice()%></span></td>
 											</tr>
 											<!-- Product Row -->
-											<tr>
-												<td class="pro-remove"><a href="#"><i class="far fa-trash-alt"></i></a></td>
-												<td class="pro-thumbnail"><a href="#"><img src="image/product/home-2/product-2.png" alt="Product"></a></td>
-												<td class="pro-title"><a href="#">Naturvet Vitapet</a></td>
-												<td class="pro-price"><span>328 VND</span></td>
-												<td class="pro-quantity">
-													<div class="pro-qty">
-														<div class="count-input-block">
-															<input type="number" class="form-control text-center" value="1">
-														</div>
-													</div>
-												</td>
-												<td class="pro-subtotal"><span>328 VND</span></td>
-											</tr>
-											<!-- Discount Row  -->
+<%}%>
 											<tr>
 												<td colspan="6" class="actions">
 													<div class="coupon-block">
@@ -137,7 +135,7 @@
                                                         <span>328 VND</span>
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,7 +154,7 @@
                                                         <span>225 VND</span>
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -175,7 +173,7 @@
                                         
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,7 +192,7 @@
                                                         <span>320 VND</span>
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -213,7 +211,7 @@
                                                         <span>500 VND</span>
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -232,7 +230,7 @@
                                                         <span>300 VND</span>
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,7 +250,7 @@
                                                         <span>120 VND</span>
                                                     </div>
                                                     <div class="btn-block">
-                                                        <a href="cart.html" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
+                                                        <a href="cart.jsp" class="btn btn-outlined btn-rounded">Thêm vào giỏ</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -264,12 +262,12 @@
 							<div class="cart-summary">
 								<div class="cart-summary-wrap">
 									<h4><span>Tóm tắt</span></h4>
-									<p>Tổng phụ <span class="text-primary">828 VND</span></p>
-									<p>Phí vận chuyển <span class="text-primary">00.00</span></p>
-									<h2>Tổng tiền <span class="text-primary">828 VND</span></h2>
+									<p>Tổng phụ <span class="text-primary"><%=total%> VND</span></p>
+									<p>Phí vận chuyển <span class="text-primary"><% int total1=0;if( total >0){total1 =35000;}else {total1=0;}%><%=total1%></span></p>
+									<h2>Tổng tiền <span class="text-primary"><%=total + total1%> VND</span></h2>
 								</div>
 								<div class="cart-summary-button">
-									<a href="checkout.html" class="checkout-btn c-btn">Thanh toán</a>
+									<a href="checkout.jsp" class="checkout-btn c-btn">Thanh toán</a>
 									<button class="update-btn c-btn">Cập nhật giỏ</button>
 								</div>
 							</div>
@@ -278,81 +276,7 @@
 				</div>
 			</div>
 			<!-- Cart Page End -->
-			<footer class="site-footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-4 col-md-6">
-							<div class="single-footer contact-block">
-								<h3 class="footer-title">Thông tin liên hệ</h3>
-								<div class="single-footer-content">
-									<p class="text-italic">PetMark cung cấp sản phẩm chất lượng, phù hợp với nhu cầu sử dụng, đảm bảo sức khỏe chăn nuôi</p>
-									<p class="font-weight-500 text-white"><span class="d-block"></span>
-								Đại học Nông Lâm Tp.HCM<br> +84-012-345-678</p>
-								<p class="social-icons">
-									<a href="#"><i class="fab fa-facebook-f"></i></a>
-									<a href="#"><i class="fab fa-twitter"></i></a>
-									<a href="#"><i class="fab fa-instagram"></i></a>
-									<a href="#"><i class="fab fa-linkedin-in"></i></a>
-									<a href="#"><i class="fas fa-rss"></i></a>
-								</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-sm-6">
-						<div class="single-footer contact-block">
-							<h3 class="footer-title">Liên kết nhanh</h3>
-							<div class="single-footer-content">
-								<ul class="footer-list">
-									<li><a href="#">Trang chủ</a></li>
-									<li><a href="#">Sản phẩm</a></li>
-									<li><a href="#">Giỏ hàng</a></li>
-									<li><a href="#">Blog</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2 col-sm-6">
-						<div class="single-footer contact-block">
-							<h3 class="footer-title">Hỗ trợ khách hàng</h3>
-							<div class="single-footer-content">
-								<ul class="footer-list">
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Liên hệ</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<div class="single-footer contact-block">
-							<h3 class="footer-title">Theo dõi chúng tôi</h3>
-							<div class="single-footer-content">
-								<p>
-									Đăng ký PetMark để nhận thông tin cập nhật về sản phẩm mới, những ưu đãi đặc biệt và chương trình giảm giá khác.
-								</p>
-								<div class="pt-2">
-									<div class="input-box-with-icon">
-										<input type="text" placeholder=" Email">
-										<button><i class="fas fa-envelope"></i></button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="footer-block-2 text-center">
-					<ul class="footer-list list-inline justify-content-center">
-					</ul>
-					<ul class="footer-list list-inline justify-content-center">
-					</ul>
-					<div class="payment-block pt-3">
-						<img src="image/icon-logo/payment-icons.png" alt="">
-					</div>
-				</div>
-			</div>
-			<div class="footer-copyright">
-				<p>© Petmark, 2022. Thiết kế bởi Nhóm 30 ❤️ </p>
-			</div>
-		</footer>
+			<jsp:include page="footer/footer.jsp"></jsp:include>
 	</div>
 	<script src="js/plugins.js"></script>
 	<script src="js/ajax-mail.js"></script>
